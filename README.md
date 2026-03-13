@@ -1,6 +1,6 @@
-# Парсер статей и комментариев
+# Парсер-менеджер комментариев
 
-Лёгкая утилита на Python для извлечения метаданных статей и текстов комментариев с веб-страниц (например, Habr).
+Лёгкая утилита на Python для извлечения метаданных статей и текстов комментариев с веб-страниц.
 
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
