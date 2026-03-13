@@ -1,3 +1,5 @@
 {
-  "url": "https://habr.com/ru/articles/346198/comments"
+  "url": "https://habr.com/ru/articles/346198/comments",
+  "comment_tree_class": "tm-comments-wrapper__inner",
+  "comment_text_class": "tm-comment__body-content"
 }

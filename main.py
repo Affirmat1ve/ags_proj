@@ -33,8 +33,8 @@ def get_requester_page(url):
 
 def get_comments(page):
     page_title = page.find('title')
-    comment_tree = BeautifulSoup(str(page.find_all('div', class_='tm-comments-wrapper__inner')), 'html5lib')
-    text_array = [x.get_text() for x in comment_tree.find_all('div', class_='tm-comment__body-content')]
+    comment_tree = BeautifulSoup(str(page.find_all('div', class_=config["comment_tree_class"])), 'html5lib')
+    text_array = [x.get_text() for x in comment_tree.find_all('div', class_=config["comment_text_class"])]
     return {'Article': page_title.string, 'Comment_texts': text_array}
 
 
