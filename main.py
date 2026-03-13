@@ -1,27 +1,29 @@
-import requests # импортируем библиотеку удаленных запросов
-from bs4 import BeautifulSoup # импортируем библиотеку парсинга BeautifulSoup
+import requests
+from bs4 import BeautifulSoup
 import json
 
 
+def get_requester_page(url):
+    response = requests.get(url)
+    page = BeautifulSoup(response.text,
+                         'html5lib')
+    return page
 
 
-def get_comments(url):
-    response = requests.get(url)  # выполняем запрос к удаленному серверу Timeweb Cloud
-    page = BeautifulSoup(response.text, 'html5lib')  # парсим ответ удаленного сервера, указывая в качестве процессора парсера библиотеку html5lib
-    pageTitle = page.find('title')
+def get_comments(page):
+    page_title = page.find('title')
     comment_tree = BeautifulSoup(str(page.find_all('div', class_='tm-comments-wrapper__inner')), 'html5lib')
     text_array = [x.get_text() for x in comment_tree.find_all('div', class_='tm-comment__body-content')]
-    return {'Article': pageTitle.string, 'comment_texts': text_array}
+    return {'Article': page_title.string, 'comment_texts': text_array}
+
 
 def dump_json(data):
     with open('output.json', 'w') as f:
-        json.dump(data, f, indent=4)  # Writes pretty-printed JSON to file
+        json.dump(data, f, indent=4)
 
 
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     url = 'https://habr.com/ru/articles/346198/comments/'
-    dump_json(get_comments(url))
-
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    web_page = get_requester_page(url)
+    comment_data = get_comments(web_page)
+    dump_json(comment_data)
