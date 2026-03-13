@@ -7,7 +7,15 @@ from pathlib import Path
 class Config:
     def __init__(self, config_path = 'config.json'):
         self._data = {}
-        self._load(config_path)
+        try:
+            self._load(config_path)
+        except:
+            print("config load error, used default")
+            self._data = {
+                "url": "https://habr.com/ru/articles/346198/comments",
+                "comment_tree_class": "tm-comments-wrapper__inner",
+                "comment_text_class": "tm-comment__body-content"
+            }
 
     def _load(self, config_path):
         path = Path(config_path)
