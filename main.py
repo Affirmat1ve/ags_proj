@@ -1,8 +1,9 @@
-import json
 import requests
 from bs4 import BeautifulSoup
 import json
 from pathlib import Path
+import detector
+from detector import is_ai_russian
 from typing import Dict, List, Any
 
 
@@ -88,7 +89,15 @@ def dump_json(data: Dict[str, Any], filename: str = 'output.json'):
         json.dump(data, f, indent=4)
 
 
+def list_low_entropy(data, threshhold):
+    for t in data['Comment_texts']:
+        if is_ai_russian(t)<4:
+            print(f'\nentropy is low, might be AI generated:')
+            print(t)
+    return
+
 if __name__ == '__main__':
-    web_page = get_requester_page(url = config['url'])
+    web_page = get_requester_page(url=config['url'])
     comment_data = get_comments(web_page)
+    list_low_entropy(comment_data,threshhold=config["ai_enthropy_threshhold"])
     dump_json(comment_data)
