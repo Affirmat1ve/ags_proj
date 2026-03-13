@@ -99,5 +99,5 @@ def list_low_entropy(data, threshold):
 if __name__ == '__main__':
     web_page = get_requester_page(url=config['url'])
     comment_data = get_comments(web_page)
-    list_low_entropy(comment_data,threshhold=config["ai_enthropy_threshhold"])
+    list_low_entropy(comment_data,threshold=config["ai_enthropy_threshold"])
     dump_json(comment_data)
