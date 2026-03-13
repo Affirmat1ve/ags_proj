@@ -24,10 +24,15 @@
 
 ags_proj/
 ├── main.py # Точка входа: загрузка → парсинг →── config.json # Конфигурация (URL, CSS-классы)
+|
 ├── pyproject.toml # Зависимости и метаданные (стиль Poetry)
+|
 ├── documentation/ # Документация: архитектура, заметки
+|
 ├── tests/ # Папка тестирования
+|
 ├── .gitignore
+|
 └── README.md
 
 ---
