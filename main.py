@@ -89,9 +89,9 @@ def dump_json(data: Dict[str, Any], filename: str = 'output.json'):
         json.dump(data, f, indent=4)
 
 
-def list_low_entropy(data, threshhold):
+def list_low_entropy(data, threshold):
     for t in data['Comment_texts']:
-        if is_ai_russian(t)<4:
+        if is_ai_russian(t)<threshold:
             print(f'\nentropy is low, might be AI generated:')
             print(t)
     return
