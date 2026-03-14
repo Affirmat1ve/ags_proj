@@ -24,8 +24,9 @@
 ```
 ags_proj/
 ├── main.py # Точка входа: загрузка → парсинг → сохранение
-├── config.json             # Конфигурация: URL, CSS-классы
-├── pyproject.toml # Зависимости и метаданные 
+├── detector.py # Модуль детекции AI
+├── config.json             # URL
+├── pyproject.toml # Зависимости
 ├── documentation/ # Документация: архитектура, заметки
 ├── tests/ # Папка тестирования
 ├── .gitignore
