@@ -57,8 +57,8 @@ python main.py
 ## Документация
 
 - documentation/architecture.md — архитектурные решения и заметки.
-- Аннотации типов и docstrings есть в коде (см. main.py).
-- Больше руководств появится позже.
+- Аннотации типов и docstrings есть в коде (см. main.py и detector.py).
+- tests/doc - документация по тестированию.
 
 ---
 
