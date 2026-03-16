@@ -21,7 +21,7 @@ def russian_entropy(text: str) -> float:
     probs = [count / len(tokens) for count in counts.values()]
     return -sum(p * math.log2(p) for p in probs if p > 0)
 
-def is_ai_russian(text):
+def is_ai_russian(text: str) -> float:
     """
     Анализирует русский текст на предмет вероятной AI-генерации.
 
