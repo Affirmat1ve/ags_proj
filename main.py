@@ -2,7 +2,6 @@ import requests
 from bs4 import BeautifulSoup
 import json
 from pathlib import Path
-import detector
 from detector import is_ai_russian
 from typing import Dict, List, Any
 
@@ -14,6 +13,7 @@ class Config:
     Используется для хранения URL, CSS-классов и других параметров,
     необходимых для парсинга страницы.
     """
+
     def __init__(self, config_path: str = 'config.json'):
         """
         Инициализирует объект Config.
@@ -51,6 +51,7 @@ class Config:
 
 
 config = Config()
+
 
 def get_requester_page(url: str) -> BeautifulSoup:
     """
@@ -91,13 +92,20 @@ def dump_json(data: Dict[str, Any], filename: str = 'output.json'):
 
 def list_low_entropy(data, threshold):
     for t in data['Comment_texts']:
-        if is_ai_russian(t)<threshold:
+        if is_ai_russian(t) < threshold:
             print(f'\nentropy is low, might be AI generated:')
             print(t)
     return
 
+
+def habr_get_comments_from_url(url: str):
+    response_page = get_requester_page(url)
+    comment_list = get_comments(response_page)
+    return comment_list
+
+
 if __name__ == '__main__':
     web_page = get_requester_page(url=config['url'])
     comment_data = get_comments(web_page)
-    list_low_entropy(comment_data,threshold=config["ai_enthropy_threshold"])
+    list_low_entropy(comment_data, threshold=config["ai_enthropy_threshold"])
     dump_json(comment_data)
