@@ -1,4 +1,4 @@
-from main import get_requester_page, config
+from main import get_requester_page
 from bs4 import BeautifulSoup
 
 
