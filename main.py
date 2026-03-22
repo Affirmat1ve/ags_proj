@@ -104,6 +104,18 @@ def habr_get_comments_from_url(url: str):
     return comment_list
 
 
+def extract_raw_text(url):
+    soup = get_requester_page(url)
+    # Remove script and style elements
+    for script in soup(["script", "style"]):
+        script.decompose()
+    text = soup.get_text()
+    lines = (line.strip() for line in text.splitlines())
+    chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
+    text = '\n'.join(chunk for chunk in chunks if chunk)
+    return text
+
+
 if __name__ == '__main__':
     web_page = get_requester_page(url=config['url'])
     comment_data = get_comments(web_page)
