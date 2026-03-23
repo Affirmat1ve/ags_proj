@@ -3,7 +3,9 @@ import os
 from main import dump_json
 
 
-def test_json_file_created():
+def test_json_file_created(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+
     data = {
         "Article": "test",
         "Comment_texts": ["1", "2"]
@@ -14,7 +16,9 @@ def test_json_file_created():
     assert os.path.exists("output.json")
 
 
-def test_json_content_is_correct():
+def test_json_content_is_correct(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    
     data = {
         "Article": "test",
         "Comment_texts": ["1", "2"]

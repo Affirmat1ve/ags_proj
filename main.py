@@ -98,13 +98,31 @@ def list_low_entropy(data, threshold):
     return
 
 
-def habr_get_comments_from_url(url: str):
+def habr_get_comments_from_url(url: str) -> Dict[str, Any]:
+    """
+    Удобная функция-обёртка для быстрого сбора комментариев без
+    необходимости ручной настройки конфигурации. Использует глобальный
+    объект config для CSS-селекторов.
+
+    :param url: адрес страницы с комментариями (например, статья на Хабре).
+    :return: словарь с ключами:
+        - 'Article' (str): заголовок страницы из тега <title>
+        - 'Comment_texts' (List[str]): список текстов комментариев
+    """
     response_page = get_requester_page(url)
     comment_list = get_comments(response_page)
     return comment_list
 
 
-def extract_raw_text(url):
+def extract_raw_text(url: str) -> str:
+    """
+    Удаляет служебные элементы (скрипты, стили), выполняет
+    пост-обработку текста: удаление лишних пробелов, пустых строк,
+    разбивку на логические фрагменты.
+
+    :param url: адрес страницы для извлечения текста.
+    :return: очищенный текст страницы, готовый для дальнейшего анализа.
+    """
     soup = get_requester_page(url)
     # Remove script and style elements
     for script in soup(["script", "style"]):
