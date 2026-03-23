@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from main import habr_get_comments_from_url
 
 
@@ -11,5 +11,8 @@ async def root():
 @app.get("/{habr_id}")
 async def read_item(habr_id: str):
     url = f"https://habr.com/ru/articles/{habr_id}/comments"
-    result = habr_get_comments_from_url(url)
+    try:
+        result = habr_get_comments_from_url(url)
+    except:
+        raise HTTPException(status_code=400, detail="parcing error")
     return result
